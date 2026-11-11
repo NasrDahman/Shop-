@@ -1,1 +1,730 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>دليل إيجاد المرجع والهاش | بوت متجرك MTJRK_Bot</title>
+    <!-- Google Fonts: Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --surface-color: #151c2c;
+            --border-color: #273549;
+            --primary: #229ed9; /* لون تلجرام البوت الرسمي */
+            --primary-hover: #1c85b8;
+            --primary-glow: rgba(34, 158, 217, 0.25);
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        body {
+            padding: 16px 10px;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Header UI for MTJRK_Bot */
+        header {
+            text-align: center;
+            padding: 20px 10px 25px;
+            word-wrap: break-word;
+        }
+
+        .bot-badge-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(34, 158, 217, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(34, 158, 217, 0.3);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .header-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-glow);
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin: 0 auto 12px;
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        header h1 {
+            font-size: clamp(1.4rem, 5vw, 2.1rem);
+            font-weight: 900;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: clamp(0.85rem, 3.5vw, 1rem);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* Sticky Navigation Bar */
+        .nav-wrapper {
+            position: sticky;
+            top: 8px;
+            z-index: 100;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            background: rgba(21, 28, 44, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 6px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        /* Card Section */
+        .content-section {
+            display: none;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-header h2 {
+            font-size: clamp(1.05rem, 4vw, 1.3rem);
+            font-weight: 800;
+            line-height: 1.4;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .badge-manual {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent-amber);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-auto {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        /* Step Items */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .step-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: var(--radius-md);
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: #fff;
+            min-width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .step-text h4 {
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .step-text p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        /* Notice Box */
+        .notice-box {
+            background: rgba(34, 158, 217, 0.08);
+            border: 1px dashed var(--primary);
+            border-radius: var(--radius-md);
+            padding: 14px;
+            margin-bottom: 18px;
+        }
+
+        .notice-title {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .notice-content {
+            color: #e2e8f0;
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .code-snippet {
+            display: block;
+            width: 100%;
+            background: rgba(0,0,0,0.5);
+            color: #38bdf8;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            direction: ltr;
+            font-weight: 700;
+            font-size: 0.8rem;
+            word-break: break-all;
+            margin-top: 6px;
+            text-align: left;
+        }
+
+        /* Responsive Gallery Grid */
+        .gallery-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            background: #090d16;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 160px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.88);
+            padding: 6px 8px;
+            text-align: center;
+        }
+
+        .gallery-tag {
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Lightbox Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        /* Return Button & Footer */
+        .return-btn-wrapper {
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
+        .btn-tg {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            transition: transform 0.2s;
+        }
+
+        .btn-tg:active {
+            transform: scale(0.97);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0 10px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="bot-badge-top">🤖 بوت متجرك MTJRK_Bot</div>
+            <div class="header-icon">💡</div>
+            <h1>دليل الشحن والتحقق من العمليات</h1>
+            <p>اختر وسيلة الدفع التي استخدمتها لشحن رصيدك لمعرفة الرقم المطلوب إرساله للبوت</p>
+        </header>
+
+        <!-- Sticky Navigation Tabs -->
+        <div class="nav-wrapper">
+            <nav class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab('ltc', this)">🪙 Litecoin (LTC)</button>
+                <button class="tab-btn" onclick="switchTab('binance', this)">🟡 Binance Pay</button>
+                <button class="tab-btn" onclick="switchTab('ton', this)">💎 شبكة TON</button>
+                <button class="tab-btn" onclick="switchTab('jaib', this)">📱 محفظة جيب</button>
+                <button class="tab-btn" onclick="switchTab('kurimi', this)">🏦 الكريمي حاسب</button>
+            </nav>
+        </div>
+
+        <!-- 1. Litecoin LTC -->
+        <div id="ltc" class="content-section active">
+            <div class="card">
+                <div class="card-header">
+                    <h2>استخراج الهاش لعملة Litecoin (LTC)</h2>
+                    <span class="badge badge-auto">تأكيد آلي للبوت</span>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <h4>فتح سجل المعاملات</h4>
+                            <p>افتح تفاصيل معاملة اللتق المكتملة في محفظتك واضغط عليها[span_0](start_span)[span_0](end_span).</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <h4>الانتقال لمستكشف الكتل</h4>
+                            <p>انزل لأسفل واضغط على <b>"View on block explorer" (عرض في مستكشف الكتل)</b>[span_1](start_span)[span_1](end_span).</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-num">3</div>
+                        <div class="step-text">
+                            <h4>نسخ الـ HASH</h4>
+                            <p>انسخ الرمز الطويل المكتوب بجانب حقل <b>HASH</b> وأرسله مباشرة للبوت[span_2](start_span)[span_2](end_span).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <div class="notice-title">📌 الرقم المطلوب إرساله للبوت:</div>
+                    <div class="notice-content">
+                        الهاش الكامل المكون من حروف وأرقام:
+                        <span class="code-snippet">7c00b111bcb6ddd6acf78ba7ac9d05a2e942c2b5ce883f9022efbe2a5a5f0f7a</span>[span_3](start_span)[span_3](end_span)
+                    </div>
+                </div>
+
+                <div class="gallery-title">📷 التوضيح بالصور (اضغط لتكبير الصورة):</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openModal('Screenshot_20261111-191857_Trust Wallet.jpg')">
+                        <img src="Screenshot_20261111-191857_Trust Wallet.jpg" alt="تفاصيل المعاملة">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">1️⃣ زر مستكشف الكتل</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item" onclick="openModal('Screenshot_20261111-192328_Trust Wallet.jpg')">
+                        <img src="Screenshot_20261111-192328_Trust Wallet.jpg" alt="نسخ الهاش">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">2️⃣ نسخ الـ HASH</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Binance Pay -->
+        <div id="binance" class="content-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>استخراج Order ID في Binance Pay</h2>
+                    <span class="badge badge-manual">إيداع يدوي</span>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <h4>فتح تفاصيل الدفع</h4>
+                            <p>بعد التحويل اذهب لقائمة تفاصيل الدفع (Payment Details) في باينانس[span_4](start_span)[span_4](end_span).</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <h4>نسخ Order ID</h4>
+                            <p>اضغط على أيقونة النسخ المجاورة لسطر <b>Order ID</b> وأرسله للبوت[span_5](start_span)[span_5](end_span).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <div class="notice-title">📌 الرقم المطلوب إرساله للبوت:</div>
+                    <div class="notice-content">
+                        معرف الطلب Order ID:
+                        <span class="code-snippet">462981523057065984</span>[span_6](start_span)[span_6](end_span)
+                    </div>
+                </div>
+
+                <div class="gallery-title">📷 التوضيح بالصور:</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openModal('Screenshot_20261111-192445_Binance.jpg')">
+                        <img src="Screenshot_20261111-192445_Binance.jpg" alt="Binance Pay Order ID">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">🔍 موقع Order ID</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. TON Network -->
+        <div id="ton" class="content-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>الشحن التلقائي عبر شبكة TON 💎</h2>
+                    <span class="badge badge-auto">شحن فوري آلي</span>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <h4>نسخ التعليق (Comment)</h4>
+                            <p>انسخ رمز التعليق المخصص الذي يعطيك إياه بوت "متجرك[span_7](start_span)"[span_7](end_span).</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <h4>وضع التعليق عند التحويل</h4>
+                            <p>ضع الرمز المنسوخ في حقل <b>Comment</b> عند الإرسال من محفظتك[span_8](start_span)[span_8](end_span).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <div class="notice-title">⚡️ تنبيه هام:</div>
+                    <div class="notice-content">
+                        عند وضع التعليق بالإرسال <b>لا داعي لإرسال أي رقم أو هاش للبوت</b>، فقط اضغط زر <b>"التحقق من وصول الدفعة"</b> داخل البوت.
+                    </div>
+                </div>
+
+                <div class="gallery-title">📷 التوضيح بالصور:</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openModal('Screenshot_20261111-194028_Keeper.jpg')">
+                        <img src="Screenshot_20261111-194028_Keeper.jpg" alt="خانة التعليق">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">🔍 حقل Comment</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. محفظة جيب (Jaib) -->
+        <div id="jaib" class="content-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>رقم مرجع العملية في تطبيق جيب</h2>
+                    <span class="badge badge-manual">إيداع يدوي</span>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <h4>إتمام التحويل لمشترك</h4>
+                            <p>قم بالتحويل إلى رقم مشترك جيب المعروض بالبوت[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span).</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <h4>نسخ الرقم المرجعي</h4>
+                            <p>افتح الإيصال وانسخ الأرقام المكتوبة أمام <b>رقم مرجع العملية</b>[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <div class="notice-title">📌 الرقم المطلوب إرساله للبوت:</div>
+                    <div class="notice-content">
+                        رقم مرجع عملية جيب:
+                        <span class="code-snippet">17951140605046</span>[span_13](start_span)[span_13](end_span)[span_14](start_span)[span_14](end_span)
+                    </div>
+                </div>
+
+                <div class="gallery-title">📷 التوضيح بالصور:</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openModal('Screenshot_20261111-193122_Jaib.jpg')">
+                        <img src="Screenshot_20261111-193122_Jaib.jpg" alt="إيصال جيب">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">🔍 رقم المرجع في جيب</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. الكريمي حاسب -->
+        <div id="kurimi" class="content-section">
+            <div class="card">
+                <div class="card-header">
+                    <h2>رقم العملية في الكريمي حاسب</h2>
+                    <span class="badge badge-manual">إيداع يدوي</span>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <h4>السداد عبر حاسب</h4>
+                            <p>قم بالتحويل عبر حاسب نقطة الشراء لنقطة (ركن البركة)[span_15](start_span)[span_15](end_span).</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <h4>نسخ رقم العملية</h4>
+                            <p>انسخ الرقم الظاهر أعلى الإيصال بجانب <b>رقم العملية</b> وأرسله للبوت[span_16](start_span)[span_16](end_span).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="notice-box">
+                    <div class="notice-title">📌 الرقم المطلوب إرساله للبوت:</div>
+                    <div class="notice-content">
+                        رقم عملية إيصال حاسب:
+                        <span class="code-snippet">53197026</span>[span_17](start_span)[span_17](end_span)
+                    </div>
+                </div>
+
+                <div class="gallery-title">📷 التوضيح بالصور:</div>
+                <div class="gallery-grid">
+                    <div class="gallery-item" onclick="openModal('Screenshot_20261111-193339_WhatsAppBusiness.jpg')">
+                        <img src="Screenshot_20261111-193339_WhatsAppBusiness.jpg" alt="إيصال الكريمي">
+                        <div class="gallery-overlay">
+                            <span class="gallery-tag">🔍 رقم العملية أعلى الإيصال</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Return to Bot Link -->
+        <div class="return-btn-wrapper">
+            <a href="https://t.me/MTJRK_Bot" class="btn-tg">
+                ↩️ العودة لـ بوت متجرك (MTJRK_Bot)
+            </a>
+        </div>
+
+        <footer>
+            <p>جميع الحقوق محفوظة لـ <b>بوت متجرك</b> &copy; 2026</p>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" class="modal-img" src="" alt="صورة مكبرة">
+    </div>
+
+    <script>
+        function switchTab(tabId, element) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            element.classList.add('active');
+        }
+
+        function openModal(imgSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = imgSrc;
+            modal.classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
